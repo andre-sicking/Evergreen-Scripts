@@ -3,7 +3,7 @@ function get-NPPCurrentVersion {
     [outputtype([version])]
     $Url = "https://notepad-plus-plus.org/downloads/"
     $Content = Invoke-WebRequest -Uri $url
-    $Matches = ($content.allelements | ? tagName -eq 'a').innerText -match "Current Version (\d+\.\d+\.\d+|\d+\.\d+)"
+    $Matches = ($content.allelements | ? tagName -eq 'a').innerText -match "Current Version \d+\.\d+(\.\d+){0,1}$"
     $ver = [version]::new($Matches[0].TrimStart("Current Version "))
     Write-Output $ver
 }
